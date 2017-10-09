@@ -22,15 +22,14 @@ Also, it writes some output into tmp/output.txt file:
 ```
 
 ## Setup
+
 You can run the application using docker:
 
 `docker-compose up`
 
-
 Once executed, it will install all dependencies, compile crystal-app, and start both applications via docker containers.
 
 ## Running
-
 
 When fired up, docker-compose output should look like this:
 
@@ -67,7 +66,7 @@ In the sample above you may see three distinct applications writing down:
 - crystal_app
 - ruby_app
 
-you should use command `tail -f tmp/output.txt` to see every new line writed on tmp/output.txt
+You may use `tail -f tmp/output.txt` to follow every new line written on the output file.
 
 ## Sidekiq Web
 
