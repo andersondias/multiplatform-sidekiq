@@ -22,34 +22,52 @@ Also, it writes some output into tmp/output.txt file:
 ```
 
 ## Setup
+You can run the application using docker:
 
-I provide a way to set up the application via the setup.sh script. It installs brew, bundler, foreman, Redis, and crystal language.
+`docker-compose up`
 
-In order to get the application running, execute in the terminal:
 
-`$ ./setup.sh`
-
-Once executed, it will install all dependencies, compile crystal-app, and start both applications via foreman.
+Once executed, it will install all dependencies, compile crystal-app, and start both applications via docker containers.
 
 ## Running
 
 
-When fired up, foreman output should look like this:
+When fired up, docker-compose output should look like this:
 
 ```
-12:19:09 ruby.1    | 2017-10-09T15:19:09.599Z 32609 TID-ox626dzv0 RubyApp::Workers::ProducerWorker JID-2bef1352ac43b2197e2d9d9f INFO: start
-12:19:09 crystal.1 | 2017-10-09T15:19:09.600Z 32606 TID-1zee83k  JID=dc4136909e800817b7c3e3de INFO: Start
-12:19:09 ruby.1    | 2017-10-09T15:19:09.600Z 32609 TID-ox626dzv0 RubyApp::Workers::ProducerWorker JID-2bef1352ac43b2197e2d9d9f INFO: done: 0.001 sec
-12:19:09 tail.1    | 6 seconds sleep received
-12:19:10 crystal.1 | 2017-10-09T15:19:10.580Z 32606 TID-1zee6tc  JID=2a385f1009cb3aca94b9c4bf INFO: Done: 9.002191 sec
+ruby_app           | 
+crystal_app        | 2017-10-09T19:25:52.937Z 1 TID-j75z4  JID=528ebf94e23c6e3591c27a1e INFO: Start
+ruby_app           | 2017-10-09T19:25:52.870Z 1 TID-grm1c8lps INFO: Running in ruby 2.4.2p198 (2017-09-14 revision 59899) [x86_64-linux-musl]
+ruby_app           | 2017-10-09T19:25:52.870Z 1 TID-grm1c8lps INFO: See LICENSE and the LGPL-3.0 for licensing details.
+ruby_app           | 2017-10-09T19:25:52.870Z 1 TID-grm1c8lps INFO: Upgrade to Sidekiq Pro for more features and support: http://sidekiq.org
+ruby_app           | 2017-10-09T19:25:52.872Z 1 TID-grm1c8lps INFO: Starting processing, hit Ctrl-C to stop
+ruby_app           | 2017-10-09T19:25:52.902Z 1 TID-grm1gpn28 RubyApp::Workers::ProducerWorker JID-384705f769a896f6db0c2519 INFO: start
+ruby_app           | 2017-10-09T19:25:52.932Z 1 TID-grm1gpn28 RubyApp::Workers::ProducerWorker JID-384705f769a896f6db0c2519 INFO: done: 0.03 sec
+ruby_app           | 2017-10-09T19:25:52.936Z 1 TID-grm1gpmns RubyApp::Workers::ProducerWorker JID-7f7b4f804fa65b28ed54e6a5 INFO: start
+ruby_app           | 2017-10-09T19:25:52.938Z 1 TID-grm1gpmns RubyApp::Workers::ProducerWorker JID-7f7b4f804fa65b28ed54e6a5 INFO: done: 0.002 sec
+ruby_app           | 2017-10-09T19:25:53.943Z 1 TID-grm1gy94g RubyApp::Workers::ProducerWorker JID-a1478d317c52a3f5c9306bec INFO: start
+crystal_app        | 2017-10-09T19:25:53.943Z 1 TID-j75z4  JID=528ebf94e23c6e3591c27a1e INFO: Done: 1.005546 sec
+crystal_app        | 2017-10-09T19:25:53.945Z 1 TID-j75vk  JID=4617f79d299cfe21b5fa2602 INFO: Start
+ruby_app           | 2017-10-09T19:25:53.945Z 1 TID-grm1gy94g RubyApp::Workers::ProducerWorker JID-a1478d317c52a3f5c9306bec INFO: done: 0.002 sec
+ruby_app           | 2017-10-09T19:25:54.948Z 1 TID-grm1gy9dc RubyApp::Workers::ProducerWorker JID-b61c441b3799ab20fdc44ed8 INFO: start
+ruby_app           | 2017-10-09T19:25:54.949Z 1 TID-grm1gy9dc RubyApp::Workers::ProducerWorker JID-b61c441b3799ab20fdc44ed8 INFO: done: 0.001 sec
+crystal_app        | 2017-10-09T19:25:54.948Z 1 TID-j75vk  JID=4617f79d299cfe21b5fa2602 INFO: Done: 1.002594 sec
+crystal_app        | 2017-10-09T19:25:54.949Z 1 TID-j75s0  JID=a1d180f54753d9d7cf420d04 INFO: Start
+crystal_app        | 2017-10-09T19:26:03.951Z 1 TID-j75s0  JID=a1d180f54753d9d7cf420d04 INFO: Done: 9.001820 sec
+ruby_app           | 2017-10-09T19:26:03.951Z 1 TID-grm1gpmns RubyApp::Workers::ProducerWorker JID-7b8f207594d73c34c27db097 INFO: start
+crystal_app        | 2017-10-09T19:26:03.953Z 1 TID-j756o  JID=1128d1e593ef06e6a2379d0b INFO: Start
+ruby_app           | 2017-10-09T19:26:03.953Z 1 TID-grm1gpmns RubyApp::Workers::ProducerWorker JID-7b8f207594d73c34c27db097 INFO: done: 0.002 sec
+crystal_app        | 2017-10-09T19:26:04.955Z 1 TID-j756o  JID=1128d1e593ef06e6a2379d0b INFO: Done: 1.001937 sec
+ruby_app           | 2017-10-09T19:26:04.955Z 1 TID-grm1gy94g RubyApp::Workers::ProducerWorker JID-484f823dee4d311466e5e32e INFO: start
+crystal_app        | 2017-10-09T19:26:04.956Z 1 TID-j73sw  JID=886991c15c1a12ed3c6043a4 INFO: Start
+ruby_app           | 2017-10-09T19:26:04.957Z 1 TID-grm1gy94g RubyApp::Workers::ProducerWorker JID-484f823dee4d311466e5e32e INFO: done: 0.001 sec
 ```
 
 In the sample above you may see three distinct applications writing down:
-- crystal.1
-- ruby.1
-- tail
+- crystal_app
+- ruby_app
 
-The last one is going to print out every new line written into tmp/output.txt.
+you should use command `tail -f tmp/output.txt` to see every new line writed on tmp/output.txt
 
 ## Sidekiq Web
 

@@ -1,0 +1,66 @@
+version: '2'
+
+services:
+  redis:
+    image: redis:3.0.7-alpine
+    container_name: redis
+    mem_limit: 128mb
+    ports:
+      - "6379:6379"
+
+  crystal_app:
+    build:
+      context: ./crystal-app
+      dockerfile: Dockerfile
+    image: crystal_app 
+    container_name: crystal_app 
+    command: bin/sidekiq -q crystal
+    environment:
+      REDIS_PROVIDER: REDIS_URL
+      REDIS_URL: redis://redis:6379
+    tty: true
+    depends_on:
+      - redis
+    external_links:
+      - redis
+    volumes:
+      - ./tmp:/tmp
+
+  crystal_web_app:
+    build:
+      context: ./crystal-app
+      dockerfile: Dockerfile
+    image: crystal_app
+    container_name: crystal_web_app 
+    command: bin/sidekiq_web
+    environment:
+      REDIS_PROVIDER: REDIS_URL
+      REDIS_URL: redis://redis:6379
+    tty: true
+    ports:
+      - "3003:3003"
+    depends_on:
+      - redis
+    external_links:
+      - redis
+
+  ruby_app:
+    build:
+      context: ./ruby-app
+      dockerfile: Dockerfile
+    image: ruby_app
+    container_name: ruby_app 
+    command: sidekiq -r ./app/ruby_app.rb -q ruby
+    environment:
+      REDIS_PROVIDER: REDIS_URL
+      REDIS_URL: redis://redis:6379
+    tty: true
+    depends_on:
+      - redis
+    external_links:
+      - redis
+    volumes:
+      - ./tmp:/tmp
+
+volumes:
+  tmp-volume:
