@@ -1,0 +1,5 @@
+/doc/
+/lib/
+/.shards/
+bin/sidekiq
+bin/sidekiq_web

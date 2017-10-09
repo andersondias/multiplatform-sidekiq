@@ -1,0 +1,20 @@
+name: crystal-app
+version: 0.1.0
+
+authors:
+  - Anderson Dias <andersondaraujo@gmail.com>
+
+targets:
+  crystal-app:
+    main: src/crystal-app.cr
+
+dependencies:
+  sidekiq:
+    github: mperham/sidekiq.cr
+    branch: master
+  kemal-session:
+    github: kemalcr/kemal-session
+
+crystal: 0.23.1
+
+license: MIT
